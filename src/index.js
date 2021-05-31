@@ -117,6 +117,11 @@ const onDecrypt = () => {
     switch (state.selectedCipher) {
     case 'Ceasar cipher': {
         decryptedText = decrypt_CeasarCipher(decryptionInput);
+        break;
+    }
+    case 'Columnar transposition cipher': {
+        decryptedText = decrypt_ColumnarTransposition(decryptionInput);
+        break;
     }
     }
 
