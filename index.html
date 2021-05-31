@@ -3,27 +3,34 @@
     <head>
         <meta charset="utf-8">
         <title>Rust embedo</title>
+        <link rel="stylesheet" href="stylesheets/style.css"
     </head>
     <body>
         <script type="module" src="src/index.js"></script>
-        <div>
-            <h3>Embedo</h3>
-            <p>Small toy application I use for playing with Rust compiled into Wasm embedded into js.</p>
+        <div class="centered">
+            <div>
+                <h3>Embedo</h3>
+                <p>Small toy application used for playing around with Rust compiled into Wasm embedded into js.</p>
+            </div>
+            <div class="padded">
+                <h3>Choose cipher</h3>
+                <select id="cipherSelect">
+                    <option>Ceasar cipher</option>
+                    <option>Columnar transposition cipher</option>
+                </select>
+            </div>
+            <div class="padded">
+                <label for="cipherOptions">Options:</label>
+                <div id="cipherOptions">
+                </div>
+            </div>
+            <div class="padded">
+                <input id="toEncrypt" />
+                <button id="encryptButton">Encrypt</button>
+                <input id ="toDecrypt" />
+                <button id="decryptButton">Decrypt</button>
+                <button id="clearButton">Clear</button>
+            </div>
         </div>
-        <div>
-            <h3>Choose cipher</h3>
-            <select id="cipherSelect">
-                <option>Ceasar cipher</option>
-                <option>Columnar transposition cipher</option>
-            </select>
-        </div>
-        <div id="cipherOptions"></div>
-        <div>
-            <input id="toEncrypt" />
-            <button id="encryptButton">Encrypt</button>
-            <input id ="toDecrypt" />
-            <button id="decryptButton">Decrypt</button>
-        </div>
-    </div>
     </body>
 </html>

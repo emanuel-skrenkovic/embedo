@@ -9,11 +9,13 @@ export const renderOptions = (optionsDiv) => {
     shiftInput.id = shiftInputId;
     shiftInput.type = 'number';
     shiftInput.value = 1;
+    shiftInput.min = 1;
 
     const shiftLabel = document.createElement('label');
     shiftLabel.id = 'shiftLabel';
     shiftLabel.innerText = 'Shift by:';
     shiftLabel.for = shiftInputId;
+    shiftLabel.classList.add('padded');
 
     optionsDiv.appendChild(shiftLabel);
     optionsDiv.appendChild(shiftInput);

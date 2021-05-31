@@ -15,13 +15,18 @@ const clearChildren = (node) => {
     }
 };
 
-const onChangeCipher = (e) => {
-    clearChildren(state.cipherOptionsDiv);
+const onClickClear = () => {
+    clearInputs();
+};
 
+const clearInputs = () => {
     state.toEncryptInput.value = '';
     state.toDecryptInput.value = '';
+};
 
-    console.log(e.target.value);
+const onChangeCipher = (e) => {
+    clearChildren(state.cipherOptionsDiv);
+    clearInputs();
 
     onSelectCipher(e.target.value);
 };
@@ -82,6 +87,8 @@ const onDecrypt = () => {
 init().then(() => {
     document.getElementById('encryptButton').onclick = onEncrypt;
     document.getElementById('decryptButton').onclick = onDecrypt;
+
+    document.getElementById('clearButton').onclick = onClickClear;
 
     document.getElementById('cipherSelect').onchange = onChangeCipher;
     onSelectCipher(document.getElementById('cipherSelect')[0].value);

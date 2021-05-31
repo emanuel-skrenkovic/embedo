@@ -26,6 +26,7 @@ export const renderOptions = (optionsDiv) => {
     keyInputLabel.id = 'keyInputLabel';
     keyInputLabel.innerText = 'Key:';
     keyInputLabel.for = keyInputId;
+    keyInputLabel.classList.add('padded');
 
     optionsDiv.appendChild(keyInputLabel);
     optionsDiv.appendChild(keyInput);
