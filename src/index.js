@@ -1,9 +1,6 @@
-import init, {
-    ceasar_cipher,
-    ceasar_decipher,
-    columnar_transposition_cipher,
-    columnar_transposition_decipher,
-} from '../pkg/embedo.js';
+import init from '../pkg/embedo.js';
+import * as ceasarCipher from './ceasarCipher.js';
+import * as columnarTransposition from './columnarTransposition.js';
 
 let state = {
     'selectedCipher': ''
@@ -13,41 +10,6 @@ const clearChildren = (node) => {
     while (node.firstChild) {
         node.removeChild(node.lastChild);
     }
-};
-
-const renderCeasarCipherOptions = () => {
-    const shiftInput = document.createElement('input');
-
-    const shiftInputId = 'ceasarShift';
-    shiftInput.id = shiftInputId;
-    shiftInput.type = 'number';
-    shiftInput.value = 1;
-
-    const shiftLabel = document.createElement('label');
-    shiftLabel.id = 'shiftLabel';
-    shiftLabel.innerText = 'Shift by:';
-    shiftLabel.for = shiftInputId;
-
-    const optionsDiv = document.getElementById('cipherOptions');
-    optionsDiv.appendChild(shiftLabel);
-    optionsDiv.appendChild(shiftInput);
-};
-
-const renderColumnarTranspositionCipher = () => {
-    const keyInput = document.createElement('input');
-
-    const keyInputId = 'columnarTranspositionKey';
-    keyInput.id = keyInputId;
-    keyInput.type = 'text';
-
-    const keyInputLabel = document.createElement('label');
-    keyInputLabel.id = 'keyInputLabel';
-    keyInputLabel.innerText = 'Key:';
-    keyInputLabel.for = keyInputId;
-
-    const optionsDiv = document.getElementById('cipherOptions');
-    optionsDiv.appendChild(keyInputLabel);
-    optionsDiv.appendChild(keyInput);
 };
 
 const onChangeCipher = (e) => {
@@ -61,35 +23,15 @@ const onSelectCipher = (selectedCipher) => {
     state.selectedCipher = selectedCipher;
 
     switch (state.selectedCipher) {
-    case 'Ceasar cipher': {
-        renderCeasarCipherOptions();
+    case ceasarCipher.CipherName: {
+        ceasarCipher.renderOptions();
         break;
     }
-    case 'Columnar transposition cipher': {
-        renderColumnarTranspositionCipher();
+    case columnarTransposition.CipherName: {
+        columnarTransposition.renderOptions();
         break;
     }
     }
-};
-
-const encrypt_CeasarCipher = (encryptionInput) => {
-    const shiftBy = document.getElementById('ceasarShift').value;
-    return ceasar_cipher(encryptionInput, shiftBy);
-};
-
-const decrypt_CeasarCipher = (decryptionInput) => {
-    const shiftBy = document.getElementById('ceasarShift').value;
-    return ceasar_decipher(decryptionInput, shiftBy);
-};
-
-const encrypt_ColumnarTransposition = (encryptionInput) => {
-    const encryptionKey = document.getElementById('columnarTranspositionKey').value;
-    return columnar_transposition_cipher(encryptionInput, encryptionKey);
-};
-
-const decrypt_ColumnarTransposition = (decryptionInput) => {
-    const encryptionKey = document.getElementById('columnarTranspositionKey').value;
-    return columnar_transposition_decipher(decryptionInput, encryptionKey);
 };
 
 const onEncrypt = () => {
@@ -98,11 +40,11 @@ const onEncrypt = () => {
     let encryptedText = '';
 
     switch (state.selectedCipher) {
-    case 'Ceasar cipher': {
-        encryptedText = encrypt_CeasarCipher(encryptionInput);
+    case ceasarCipher.CipherName: {
+        encryptedText = ceasarCipher.encrypt(encryptionInput);
     }
-    case 'Columnar transposition cipher': {
-        encryptedText = encrypt_ColumnarTransposition(encryptionInput);
+    case columnarTransposition.CipherName: {
+        encryptedText = columnarTransposition.encrypt(encryptionInput);
     }
     }
 
@@ -115,12 +57,12 @@ const onDecrypt = () => {
     let decryptedText = '';
 
     switch (state.selectedCipher) {
-    case 'Ceasar cipher': {
-        decryptedText = decrypt_CeasarCipher(decryptionInput);
+    case ceasarCipher.CipherName: {
+        decryptedText = ceasarCipher.decrypt(decryptionInput);
         break;
     }
-    case 'Columnar transposition cipher': {
-        decryptedText = decrypt_ColumnarTransposition(decryptionInput);
+    case columnarTransposition.CipherName: {
+        decryptedText = columnarTransposition.decrypt(decryptionInput);
         break;
     }
     }
