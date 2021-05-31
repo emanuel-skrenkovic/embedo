@@ -1,4 +1,9 @@
-import init, { ceasar_cipher, ceasar_decipher } from '../pkg/embedo.js';
+import init, {
+    ceasar_cipher,
+    ceasar_decipher,
+    columnar_transposition_cipher,
+    columnar_transposition_decipher,
+} from '../pkg/embedo.js';
 
 let state = {
     'selectedCipher': ''
@@ -28,6 +33,23 @@ const renderCeasarCipherOptions = () => {
     optionsDiv.appendChild(shiftInput);
 };
 
+const renderColumnarTranspositionCipher = () => {
+    const keyInput = document.createElement('input');
+
+    const keyInputId = 'columnarTranspositionKey';
+    keyInput.id = keyInputId;
+    keyInput.type = 'text';
+
+    const keyInputLabel = document.createElement('label');
+    keyInputLabel.id = 'keyInputLabel';
+    keyInputLabel.innerText = 'Key:';
+    keyInputLabel.for = keyInputId;
+
+    const optionsDiv = document.getElementById('cipherOptions');
+    optionsDiv.appendChild(keyInputLabel);
+    optionsDiv.appendChild(keyInput);
+};
+
 const onChangeCipher = (e) => {
     const optionsDiv = document.getElementById('cipherOptions');
     clearChildren(optionsDiv);
@@ -41,6 +63,11 @@ const onSelectCipher = (selectedCipher) => {
     switch (state.selectedCipher) {
     case 'Ceasar cipher': {
         renderCeasarCipherOptions();
+        break;
+    }
+    case 'Columnar transposition cipher': {
+        renderColumnarTranspositionCipher();
+        break;
     }
     }
 };
@@ -55,6 +82,16 @@ const decrypt_CeasarCipher = (decryptionInput) => {
     return ceasar_decipher(decryptionInput, shiftBy);
 };
 
+const encrypt_ColumnarTransposition = (encryptionInput) => {
+    const encryptionKey = document.getElementById('columnarTranspositionKey').value;
+    return columnar_transposition_cipher(encryptionInput, encryptionKey);
+};
+
+const decrypt_ColumnarTransposition = (decryptionInput) => {
+    const encryptionKey = document.getElementById('columnarTranspositionKey').value;
+    return columnar_transposition_decipher(decryptionInput, encryptionKey);
+};
+
 const onEncrypt = () => {
     const encryptionInput = document.getElementById('toEncrypt').value;
 
@@ -63,6 +100,9 @@ const onEncrypt = () => {
     switch (state.selectedCipher) {
     case 'Ceasar cipher': {
         encryptedText = encrypt_CeasarCipher(encryptionInput);
+    }
+    case 'Columnar transposition cipher': {
+        encryptedText = encrypt_ColumnarTransposition(encryptionInput);
     }
     }
 
