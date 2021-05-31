@@ -3,7 +3,10 @@ import * as ceasarCipher from './ceasarCipher.js';
 import * as columnarTransposition from './columnarTransposition.js';
 
 let state = {
-    'selectedCipher': ''
+    'selectedCipher': '',
+    'toEncryptInput': document.getElementById('toEncrypt'),
+    'toDecryptInput': document.getElementById('toDecrypt'),
+    'cipherOptionsDiv': document.getElementById('cipherOptions')
 };
 
 const clearChildren = (node) => {
@@ -13,8 +16,12 @@ const clearChildren = (node) => {
 };
 
 const onChangeCipher = (e) => {
-    const optionsDiv = document.getElementById('cipherOptions');
-    clearChildren(optionsDiv);
+    clearChildren(state.cipherOptionsDiv);
+
+    state.toEncryptInput.value = '';
+    state.toDecryptInput.value = '';
+
+    console.log(e.target.value);
 
     onSelectCipher(e.target.value);
 };
@@ -24,35 +31,37 @@ const onSelectCipher = (selectedCipher) => {
 
     switch (state.selectedCipher) {
     case ceasarCipher.CipherName: {
-        ceasarCipher.renderOptions();
+        ceasarCipher.renderOptions(state.cipherOptionsDiv);
         break;
     }
     case columnarTransposition.CipherName: {
-        columnarTransposition.renderOptions();
+        columnarTransposition.renderOptions(state.cipherOptionsDiv);
         break;
     }
     }
 };
 
 const onEncrypt = () => {
-    const encryptionInput = document.getElementById('toEncrypt').value;
+    const encryptionInput = state.toEncryptInput.value;
 
     let encryptedText = '';
 
     switch (state.selectedCipher) {
     case ceasarCipher.CipherName: {
         encryptedText = ceasarCipher.encrypt(encryptionInput);
+        break;
     }
     case columnarTransposition.CipherName: {
         encryptedText = columnarTransposition.encrypt(encryptionInput);
+        break;
     }
     }
 
-    document.getElementById("toDecrypt").value = encryptedText;
+    state.toDecryptInput.value = encryptedText;
 };
 
 const onDecrypt = () => {
-    const decryptionInput = document.getElementById('toDecrypt').value;
+    const decryptionInput = state.toDecryptInput.value;
 
     let decryptedText = '';
 
@@ -67,7 +76,7 @@ const onDecrypt = () => {
     }
     }
 
-    document.getElementById('toEncrypt').value = decryptedText;
+    state.toEncryptInput.value = decryptedText;
 };
 
 init().then(() => {
