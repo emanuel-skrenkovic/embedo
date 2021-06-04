@@ -1,0 +1,20 @@
+html * {
+    font-size: 1em !important;
+    color: #000 !important;
+    font-family: Arial !important;
+}
+
+.centered {
+    margin-top: 4vw;
+    margin-bottom: 4vw;
+    margin-left: 30vw;
+    margin-right: 30vw;
+}
+
+.padded {
+    margin: 2vw;
+}
+
+#clearButton {
+    margin-top: 1vw;
+}
