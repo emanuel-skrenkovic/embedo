@@ -1,7 +1,7 @@
 import {
     columnar_transposition_encrypt,
     columnar_transposition_decrypt
-} from '../pkg/embedo.js';
+} from './embedo.js';
 
 export const CipherName = 'Columnar transposition cipher';
 

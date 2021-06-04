@@ -1,4 +1,4 @@
-import { ceasar_cipher_encrypt, ceasar_cipher_decrypt } from '../pkg/embedo.js';
+import { ceasar_cipher_encrypt, ceasar_cipher_decrypt } from './embedo.js';
 
 export const CipherName = 'Ceasar cipher';
 

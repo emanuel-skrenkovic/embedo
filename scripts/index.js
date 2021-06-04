@@ -1,4 +1,4 @@
-import init from '../pkg/embedo.js';
+import init from './embedo.js';
 import * as ceasarCipher from './ceasarCipher.js';
 import * as columnarTransposition from './columnarTransposition.js';
 
